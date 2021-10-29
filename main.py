@@ -14,7 +14,7 @@ app = Flask(__name__)
 def hello_world():
     return render_template('main.html')
 
-@app.route('/verify'', methods=['POST'])
+@app.route('/verify', methods=['POST'])
 def verify_user():
     entered_pin = request.form['PIN']
     return f'Your PIN was {entered_pin}'
