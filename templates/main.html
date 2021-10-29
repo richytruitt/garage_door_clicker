@@ -19,12 +19,11 @@
             </div>
             
             <div class="col-sm-9">
-                <form action="{{ url_for('hello_world') }}" method="post" style="vertical-align: middle;">
+                <form action="{{ url_for('verify_user') }}" method="post" style="vertical-align: middle;">
                         
                     <div class="form-group">
-                        <label for="student_id">Student ID</label>
-                        <input type="text" inputmode="numeric" class="form-control" id="student_id" aria-describedby="st" placeholder="Scan student ID" name="student_name">
-                        <small id="emailHelp" class="form-text text-muted">This is an example of text below the box</small>
+                        <label for="entered_pin">Enter Your PIN</label>
+                        <input type="text" inputmode="numeric" class="form-control" id="entered_pin" aria-describedby="st" placeholder="Enter Your PIN" name="PIN">
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
