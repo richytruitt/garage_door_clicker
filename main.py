@@ -8,10 +8,11 @@ import time
 
 app = Flask(__name__)
 import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD)
 
-RELAIS_1_GPIO = 17
-GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
+RELAY_1_GPIO = 17
+GPIO.setup(RELAY_1_GPIO, GPIO.OUT)
+GPIO.setwarnings(False)
 
 @app.route('/')
 def index():
@@ -28,9 +29,9 @@ def verify_and_open():
     entered_pin = request.form['PIN']
     if entered_pin == '12345':
         print('DOOR OPENING')
-        GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)
+        GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
         time.sleep(1)
-        GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
+        GPIO.output(RELAY_1_GPIO, GPIO.LOW)
     return redirect(url_for("index"))
     
 
