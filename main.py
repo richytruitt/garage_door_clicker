@@ -15,7 +15,7 @@ GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
 
 @app.route('/')
 def index():
-    door_status = 1
+    door_status = 0
     print(f'door status is {door_status}')
     if door_status == 0:
         return render_template('door_closed.html')
@@ -28,7 +28,9 @@ def verify_and_open():
     entered_pin = request.form['PIN']
     if entered_pin == '12345':
         print('DOOR OPENING')
-        time.sleep(3)
+            GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)
+            time.sleep(1)
+            GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
     return redirect(url_for("index"))
     
 
