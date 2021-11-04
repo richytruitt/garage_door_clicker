@@ -7,9 +7,11 @@ import random
 import time
 
 app = Flask(__name__)
-# GPIO.setwarnings(False)    # Ignore warning for now
-# GPIO.setmode(GPIO.BOARD)   # Use physical pin numbering
-# GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
+import RPi.GPIO as GPIO
+GPIO.setmode(GPIO.BCM)
+
+RELAIS_1_GPIO = 17
+GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
 
 @app.route('/')
 def index():
@@ -29,11 +31,15 @@ def verify_and_open():
         time.sleep(3)
     return redirect(url_for("index"))
     
+
 @app.route('/close_door')
 def close_door():
     print('Door has been triggered to close')
-    time.sleep(3)
-    return redirect(url_for("index"))
+    GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)
+    time.sleep(1)
+    GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
+
+    # return redirect(url_for("index"))
 
 
 
