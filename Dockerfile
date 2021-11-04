@@ -11,4 +11,4 @@ RUN pip install -r requirements.txt
 RUN pip install --no-cache-dir rpi.gpio
 
 
-CMD ["python3", "main.py" ]
+CMD ["python3", "./main.py"]
