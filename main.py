@@ -15,7 +15,7 @@ GPIO.setup(RELAIS_1_GPIO, GPIO.OUT)
 
 @app.route('/')
 def index():
-    door_status = random.randint(0,1)
+    door_status = 1
     print(f'door status is {door_status}')
     if door_status == 0:
         return render_template('door_closed.html')
@@ -39,7 +39,7 @@ def close_door():
     time.sleep(1)
     GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
 
-    # return redirect(url_for("index"))
+    return redirect(url_for("index"))
 
 
 
