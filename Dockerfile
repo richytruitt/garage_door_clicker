@@ -8,7 +8,7 @@ COPY . /app
 WORKDIR /app
 
 RUN pip install -r requirements.txt
-RUN sudo apt-get install rpi.gpio
+RUN pip install --no-cache-dir rpi.gpio
 
 
 CMD ["python3", "main.py" ]
