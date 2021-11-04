@@ -28,9 +28,9 @@ def verify_and_open():
     entered_pin = request.form['PIN']
     if entered_pin == '12345':
         print('DOOR OPENING')
-            GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)
-            time.sleep(1)
-            GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
+        GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)
+        time.sleep(1)
+        GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
     return redirect(url_for("index"))
     
 
