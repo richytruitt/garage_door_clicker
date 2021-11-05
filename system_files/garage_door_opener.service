@@ -1,22 +1,12 @@
 [Unit]
-Description=$SERVICENAME
-Requires=docker.service
-After=docker.service
+Description=Garage Door Opener
+After=network.target
 
 [Service]
-Restart=always
 User=pi
-Group=docker
-WorkingDirectory=/home/pi/garage_door_clicker
-
-# Shutdown container (if running) when unit is started
-ExecStartPre=$(which docker-compose) -f docker-compose.yml down
-
-# Start container when unit is started
-ExecStart=$(which docker-compose) -f docker-compose.yml up -d
-
-# Stop container when unit is stopped
-ExecStop=$(which docker-compose) -f docker-compose.yml down
+WorkingDirectory=/home/pi/garage_door_clicker/
+ExecStart=python3 main.py
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
