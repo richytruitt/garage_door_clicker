@@ -6,7 +6,7 @@ After=network.target
 type=simple
 User=pi
 WorkingDirectory=/home/pi/garage_door_clicker/
-ExecStart=/usr/bin/python3 main.py
+ExecStart=/usr/bin/python3 /home/pi/garage_door_clicker/main.py
 Restart=always
 
 [Install]
