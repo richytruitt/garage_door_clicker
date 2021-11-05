@@ -8,7 +8,7 @@ import time
 
 app = Flask(__name__)
 import RPi.GPIO as GPIO
-GPIO.setmode(GPIO.BOARD)
+GPIO.setmode(GPIO.BCM)
 
 RELAY_1_GPIO = 17
 GPIO.setup(RELAY_1_GPIO, GPIO.OUT)
