@@ -35,17 +35,5 @@ def verify_and_open():
     return redirect(url_for("index"))
     
 
-@app.route('/close_door')
-def close_door():
-    print('Door has been triggered to close')
-    GPIO.output(RELAIS_1_GPIO, GPIO.HIGH)
-    time.sleep(1)
-    GPIO.output(RELAIS_1_GPIO, GPIO.LOW)
-
-    return redirect(url_for("index"))
-
-
-
-
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='5555')

@@ -5,7 +5,7 @@ After=network.target
 [Service]
 type=simple
 User=pi
-WorkingDirectory=/home/pi/garage_door_clicker/
+WorkingDirectory=/home/pi/garage_door_clicker
 ExecStart=/usr/bin/python3 /home/pi/garage_door_clicker/main.py
 Restart=always
 
