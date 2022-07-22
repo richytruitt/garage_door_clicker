@@ -28,7 +28,6 @@ def index():
 def verify_and_open():
     entered_pin = request.form['PIN']
     if entered_pin == '12345':
-        print('DOOR OPENING')
         GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
         time.sleep(1)
         GPIO.output(RELAY_1_GPIO, GPIO.LOW)
