@@ -39,6 +39,7 @@ def verify_and_open():
         # GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
         # time.sleep(1)
         # GPIO.output(RELAY_1_GPIO, GPIO.LOW)
+        print('Hello World')
     return redirect(url_for("index"))
     
 
