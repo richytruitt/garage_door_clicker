@@ -45,9 +45,9 @@ class DbAccess:
             print('fail')
 
 
-            if passwd == entered_pin:
-                print(f'The pins match for user: {selected_user}')
-                return True
-            else:
-                print('Pins do not match')
-                return False
+        if passwd == entered_pin:
+            print(f'The pins match for user: {selected_user}')
+            return True
+        else:
+            print('Pins do not match')
+            return False
