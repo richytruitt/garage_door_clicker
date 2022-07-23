@@ -62,7 +62,7 @@ class DbAccess:
 
     def add_user(self, form_new_user, form_new_user_pass):
         
-        encoded_pass = base64.b64decode(form_new_user_pass.encode())
+        encoded_pass = base64.b64decode(form_new_user_pass.encode()).decode()
         self.cur.execute(f"INSERT INTO users VALUES('{form_new_user}', '{encoded_pass}')")
         self.conn.commit()
 
