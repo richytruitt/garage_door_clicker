@@ -60,7 +60,7 @@ class DbAccess:
         except:
             print('fail')
 
-    def add_user(form_new_user, form_new_user_pass):
+    def add_user(self, form_new_user, form_new_user_pass):
         try:
             encoded_pass = base64.b64decode(form_new_user_pass.encode())
             self.cur.execute(f"INSERT INTO users VALUES('{form_new_user}', '{encoded_pass}')")
