@@ -35,7 +35,7 @@ class DbAccess:
         try:
             print('inside validate users')
             cur = conn.cursor()
-            cur.execute(f'SELECT * FROM users WHERE name="{selected_user}"')
+            cur.execute(f"SELECT * FROM users WHERE name='{selected_user}'")
             data = cur.fetchone()
             print(data)
             passwd = base64.b64decode(data[1]).decode()
