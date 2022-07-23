@@ -32,11 +32,13 @@ def index():
 
 @app.route('/verify_and_open', methods=['POST'])
 def verify_and_open():
+    selected_user = request.form['USER']
     entered_pin = request.form['PIN']
+    print(f'Selected user was {selected_user}')
     if entered_pin == '12345':
-        GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
-        time.sleep(1)
-        GPIO.output(RELAY_1_GPIO, GPIO.LOW)
+        # GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
+        # time.sleep(1)
+        # GPIO.output(RELAY_1_GPIO, GPIO.LOW)
     return redirect(url_for("index"))
     
 
