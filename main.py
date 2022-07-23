@@ -16,18 +16,18 @@ RELAY_1_GPIO = 17
 GPIO.setup(RELAY_1_GPIO, GPIO.OUT)
 GPIO.setwarnings(False)
 
+DB = DbAccess('localhost','pi','raspberry','garage_door')
+DB.set_connection()
+DB.set_cur()
+
 @app.route('/')
 def index():
     door_status = 0
     print(f'door status is {door_status}')
     
-    db = DbAccess('localhost','pi','raspberry','garage_door')
+    users = DB.get_users(DB_CONNECTION)
 
-    db_connection = db.connect()
-
-    users = db.get_users(db_connection)
-
-    return render_template('door_closed.html', users=users)
+    return render_template('door_controller.html', users=users)
 
 
 @app.route('/verify_and_open', methods=['POST'])
@@ -35,22 +35,36 @@ def verify_and_open():
     selected_user = request.form.get('USER')
     entered_pin = request.form['PIN']
 
-    db = DbAccess('localhost','pi','raspberry','garage_door')
+    validated = DB.validate_user(selected_user, entered_pin, DB_CONNECTION)
 
-    db_connection = db.connect()
-
-    validated = db.validate_user(selected_user, entered_pin, db_connection)
-
-    print(f'Selected user was {selected_user}')
-
-    
     if validated:
         GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
         time.sleep(1)
         GPIO.output(RELAY_1_GPIO, GPIO.LOW)
-        print('Hello World')
     return redirect(url_for("index"))
-    
+
+
+
+@app.route('/new_user')
+def add_user():
+
+    return render_template('add_user.html', users=users)
+
+
+@app.route('/new_user_attempt')
+def new_user_attempt():
+    form_new_user = request.form['USER']
+    form_new_user_pass = request.form['PASS']
+    form_admin_passwd = request.form['ADMIN_PASS']
+
+    validated = DB.validate_user('admin', form_admin_passwd)
+
+    if validated:
+        DB.add_user(form_new_user, form_new_user_pass)
+        return redirect(url_for("add_user"))
+    else:
+        return "User not created, check admin credentials"
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port='5555')

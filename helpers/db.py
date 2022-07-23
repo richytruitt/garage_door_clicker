@@ -8,6 +8,9 @@ class DbAccess:
         self.password = password
         self.port = '5432'
         self.dbname = dbname
+        
+        self.conn = None
+        self.cur = None
 
     def connect(self):
         conn = psycopg2.connect(
@@ -20,26 +23,31 @@ class DbAccess:
 
         return conn
 
-    def get_users(self, conn):
+    def set_connection(self):
+        self.conn = self.connect()
+
+    
+    def set_cur(self):
+        self.cur = self.conn.cursor()
+
+    
+    
+    def get_users(self):
 
         try:
-            cur = conn.cursor()
-            cur.execute('SELECT name FROM users')
-            users = cur.fetchall()
+            self.cur.execute('SELECT name FROM users')
+            users = self.cur.fetchall()
             return [r[0] for r in users]
 
         except:
             print('fail')
 
-    def validate_user(self, selected_user, entered_pin, conn):
+    
+    def validate_user(self, selected_user, entered_pin):
         try:
-            print('inside validate users')
-            cur = conn.cursor()
-            cur.execute(f"SELECT * FROM users WHERE name='{selected_user}'")
-            data = cur.fetchone()
-            print(data)
+            self.cur.execute(f"SELECT * FROM users WHERE name='{selected_user}'")
+            data = self.cur.fetchone()
             passwd = base64.b64decode(data[1]).decode()
-            print(f'Pass: {passwd}')
 
             if passwd == entered_pin:
                 print(f'The pins match for user: {selected_user}')
@@ -51,4 +59,14 @@ class DbAccess:
             
         except:
             print('fail')
+
+    def add_user(form_new_user, form_new_user_pass):
+        try:
+            self.cur.execute(f"INSERT INTO users VALUES('{form_new_user}', '{form_new_user_pass}')")
+            self.conn.commit()
+
+        except:
+            print('fail in save new user')
+
+
 
