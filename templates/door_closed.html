@@ -23,10 +23,10 @@
                         
                     <div class="form-group">
                         <label for="users">Users: </label>
-                        <select class="custom-select mr-sm-2" id="users">
+                        <select class="custom-select mr-sm-2" name="USER" id="users">
                           <option selected>User Select...</option>
                           {% for user in users %}
-                          <option value="{{ user }}" name="USER">{{user}}</option>
+                          <option value="{{ user }}">{{user}}</option>
                           {% endfor %}
 
                         </select>
