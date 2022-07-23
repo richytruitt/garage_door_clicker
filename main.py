@@ -34,8 +34,17 @@ def index():
 def verify_and_open():
     selected_user = request.form.get('USER')
     entered_pin = request.form['PIN']
+
+    db = DbAccess('localhost','pi','raspberry','garage_door')
+
+    db_connection = db.connect()
+
+    validated = db.validate_user(selected_user, entered_pin)
+
     print(f'Selected user was {selected_user}')
-    if entered_pin == '12345':
+
+    
+    if validated:
         # GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
         # time.sleep(1)
         # GPIO.output(RELAY_1_GPIO, GPIO.LOW)

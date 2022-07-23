@@ -1,4 +1,5 @@
 import psycopg2
+import base64
 
 class DbAccess:
     def __init__(self, host, user, password, dbname):
@@ -29,3 +30,20 @@ class DbAccess:
 
         except:
             print('fail')
+
+    def validate_user(self, selected_user, entered_pin):
+        try:
+            cur = conn.cursor()
+            cur.execute(f'SELECT * FROM users WHERE name="{selected_user}"')
+            data = cur.fetchone()
+            print(data)
+            passwd = base64.b64decode(data[1]).decode()
+            print(f'Pass: {passwd}')
+            
+            
+            if passwd == entered_pin:
+                print(f'The pins match for user: {selected_user}')
+                return True
+            else:
+                print('Pins do not match')
+                return False
