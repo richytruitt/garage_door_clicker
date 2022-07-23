@@ -6,6 +6,8 @@ from jinja2 import Environment, FileSystemLoader
 import random
 import time
 
+from helpers.db import DbAccess
+
 app = Flask(__name__)
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
@@ -18,10 +20,14 @@ GPIO.setwarnings(False)
 def index():
     door_status = 0
     print(f'door status is {door_status}')
-    if door_status == 0:
-        return render_template('door_closed.html')
-    else:
-        return render_template('door_open.html')
+    
+    db = DbAccess('localhost','pi','raspberry','garage_door')
+
+    db_connection = db.connect()
+
+    users = db.get_users(db_connection)
+
+    return render_template('door_closed.html')
 
 
 @app.route('/verify_and_open', methods=['POST'])
