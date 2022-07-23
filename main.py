@@ -32,7 +32,7 @@ def index():
 
 @app.route('/verify_and_open', methods=['POST'])
 def verify_and_open():
-    selected_user = request.form['USER']
+    selected_user = request.form.get('USER')
     entered_pin = request.form['PIN']
     print(f'Selected user was {selected_user}')
     if entered_pin == '12345':
