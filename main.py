@@ -39,7 +39,7 @@ def verify_and_open():
 
     db_connection = db.connect()
 
-    validated = db.validate_user(selected_user, entered_pin)
+    validated = db.validate_user(selected_user, entered_pin, conn)
 
     print(f'Selected user was {selected_user}')
 

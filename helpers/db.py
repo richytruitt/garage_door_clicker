@@ -31,7 +31,7 @@ class DbAccess:
         except:
             print('fail')
 
-    def validate_user(self, selected_user, entered_pin):
+    def validate_user(self, selected_user, entered_pin, conn):
         try:
             cur = conn.cursor()
             cur.execute(f'SELECT * FROM users WHERE name="{selected_user}"')
@@ -44,7 +44,7 @@ class DbAccess:
         except:
             print('fail')
 
-            
+
             if passwd == entered_pin:
                 print(f'The pins match for user: {selected_user}')
                 return True
