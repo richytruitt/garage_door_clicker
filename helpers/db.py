@@ -33,21 +33,22 @@ class DbAccess:
 
     def validate_user(self, selected_user, entered_pin, conn):
         try:
+            print('inside validate users')
             cur = conn.cursor()
             cur.execute(f'SELECT * FROM users WHERE name="{selected_user}"')
             data = cur.fetchone()
             print(data)
             passwd = base64.b64decode(data[1]).decode()
             print(f'Pass: {passwd}')
+
+            if passwd == entered_pin:
+                print(f'The pins match for user: {selected_user}')
+                return True
+            else:
+                print('Pins do not match')
+                return False
             
             
         except:
             print('fail')
 
-
-        if passwd == entered_pin:
-            print(f'The pins match for user: {selected_user}')
-            return True
-        else:
-            print('Pins do not match')
-            return False
