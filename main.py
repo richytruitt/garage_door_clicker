@@ -27,7 +27,7 @@ def index():
 
     users = db.get_users(db_connection)
 
-    return render_template('door_closed.html')
+    return render_template('door_closed.html', users=users)
 
 
 @app.route('/verify_and_open', methods=['POST'])

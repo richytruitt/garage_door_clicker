@@ -22,6 +22,14 @@
                 <form action="{{ url_for('verify_and_open') }}" method="post" style="vertical-align: middle;">
                         
                     <div class="form-group">
+                        <label for="users">Users: </label>
+                        <select name="users" id="users" onfocus="this.selectedIndex = -1;"></select>
+                        
+                          {% for user in users %}
+                          <option value="{{ item.id }}">{{item.Dept_name}}</option>
+                          {% endfor %}
+
+                        </select>
                         <label for="entered_pin">Enter Your PIN</label>
                         <input type="text" inputmode="numeric" class="form-control" id="entered_pin" aria-describedby="st" placeholder="Enter Your PIN" name="PIN">
                     </div>

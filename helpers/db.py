@@ -25,7 +25,6 @@ class DbAccess:
             cur = conn.cursor()
             cur.execute('SELECT name FROM users')
             users = cur.fetchall()
-            print(users)
             return [r[0] for r in users]
 
         except:
