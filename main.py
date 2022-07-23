@@ -48,7 +48,7 @@ def verify_and_open():
 @app.route('/new_user')
 def add_user():
 
-    return render_template('add_user.html', users=users)
+    return render_template('add_user.html')
 
 
 @app.route('/new_user_attempt')
