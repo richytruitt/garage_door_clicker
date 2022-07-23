@@ -25,7 +25,7 @@ def index():
     door_status = 0
     print(f'door status is {door_status}')
     
-    users = DB.get_users(DB_CONNECTION)
+    users = DB.get_users()
 
     return render_template('door_controller.html', users=users)
 
