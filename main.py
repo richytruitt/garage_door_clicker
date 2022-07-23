@@ -51,7 +51,7 @@ def add_user():
     return render_template('add_user.html')
 
 
-@app.route('/new_user_attempt')
+@app.route('/new_user_attempt', methods=['POST'])
 def new_user_attempt():
     form_new_user = request.form['USER']
     form_new_user_pass = request.form['PASS']
