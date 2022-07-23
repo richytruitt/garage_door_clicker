@@ -24,9 +24,9 @@
                     <div class="form-group">
                         <label for="users">Users: </label>
                         <select name="users" id="users" onfocus="this.selectedIndex = -1;"></select>
-                        
+
                           {% for user in users %}
-                          <option value="{{ item.id }}">{{item.Dept_name}}</option>
+                          <option value="{{ user }}">{{user}}</option>
                           {% endfor %}
 
                         </select>
