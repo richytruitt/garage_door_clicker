@@ -35,7 +35,7 @@ def verify_and_open():
     selected_user = request.form.get('USER')
     entered_pin = request.form['PIN']
 
-    validated = DB.validate_user(selected_user, entered_pin, DB_CONNECTION)
+    validated = DB.validate_user(selected_user, entered_pin)
 
     if validated:
         GPIO.output(RELAY_1_GPIO, GPIO.HIGH)
