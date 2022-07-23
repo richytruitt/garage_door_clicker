@@ -23,14 +23,13 @@
                         
                     <div class="form-group">
                         <label for="users">Users: </label>
-                        <select class="form-select" name="users" id="users">
-
+                        <select class="custom-select mr-sm-2" id="users">
+                          <option selected>User Select...</option>
                           {% for user in users %}
                           <option value="{{ user }}">{{user}}</option>
                           {% endfor %}
 
                         </select>
-                        <br/>
                         <label for="entered_pin">Enter Your PIN</label>
                         <input type="text" inputmode="numeric" class="form-control" id="entered_pin" aria-describedby="st" placeholder="Enter Your PIN" name="PIN">
                     </div>
