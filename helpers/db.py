@@ -61,10 +61,14 @@ class DbAccess:
             print('fail')
 
     def add_user(self, form_new_user, form_new_user_pass):
+
+        if form_new_user == 'admin':
+            print('Admin credentials not allowed')
         
-        encoded_pass = base64.b64encode(form_new_user_pass.encode()).decode()
-        self.cur.execute(f"INSERT INTO users VALUES('{form_new_user}', '{encoded_pass}')")
-        self.conn.commit()
+        else:
+            encoded_pass = base64.b64encode(form_new_user_pass.encode()).decode()
+            self.cur.execute(f"INSERT INTO users VALUES('{form_new_user}', '{encoded_pass}')")
+            self.conn.commit()
 
 
 
